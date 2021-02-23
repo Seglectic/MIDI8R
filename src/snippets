@@ -1,0 +1,30 @@
+/* -------------------------------- Silly Sin Wave Test-------------------------------- */
+
+float Wave        = 0; 
+float waveTimer   = 300;
+float waveSpeed   = 0.1;
+int   waveDir     = 1;
+int   waveX       = 64; 
+int   waveY       = 32;
+int   waveAmp     = 15; //amplitude
+
+
+
+void waveDisplay(){
+  display.drawCircle(waveX,waveY,3,BLACK);
+  display.drawPixel(waveX,waveY, BLACK);
+  display.fillRect(0,0,64,15,WHITE);
+  waveTimer += waveSpeed;
+  if(waveTimer>=360){waveTimer=0;}
+  Wave      = sin(waveTimer);
+  waveX     += waveDir;
+  waveY     = 40+ (Wave*waveAmp);
+  if(waveX>127||waveX<0){waveDir*=-1;}
+  display.drawPixel(waveX,waveY, WHITE);
+  display.drawCircle(waveX,waveY,3,WHITE);
+  display.setCursor(0,0);
+  display.setTextSize(2);
+  display.setTextColor(BLACK);
+  display.print(waveTimer);
+  display.display();
+}
